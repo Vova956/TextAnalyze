@@ -3,11 +3,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Logger = require('../Logger')
 
+
 const authRouter = require('./Routers/authRouter')
 
 const errorMiddleware = require("./Middlewares/errorMiddleware")
 
-const PORT = process.env.PORT
+const PORT = process.env.AUTH_PORT
 const URL = process.env.DB_URL
 
 const app = express();

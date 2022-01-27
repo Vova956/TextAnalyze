@@ -1,28 +1,32 @@
 const UserDTO = require("../DTO/userDTO");
-const userModel = require("../Models/userModel");
 const Logger = require("../../Logger")
+const https = require('https');
+var XMLHttpRequest = require('xhr2');
 
 
 class AuthService{
     async addUser(userDTO){
-        const request = new Request('localhost:3000/auth/addUser', {
-        method: 'POST', 
-        body: JSON.stringify({login: userDTO.login, password : userDTO.password})});
+      var buff;
+      /*const request = new Request('localhost:3000/auth/addUser', {
+      method: 'POST', 
+      body: JSON.stringify({login: userDTO.login, password : userDTO.password})});*/
 
-        fetch(request)
-        .then(response => {
-          if (response.status == 200) {
-            return response.json();
-          } else {
-            throw new Error('SERVER REQUEST ERROR');
-          }
-        })
-        .then(response => {
-            Logger.debug(response);
-        }).catch(error => {
-            Logger.error(error);
-        });
-        
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST','http://localhost:3000/auth/addUser',true)
+      xhr.responseType = 'json'
+
+      xhr.onload = function(e){
+          buff = xhr.response;
+      }
+
+      xhr.onerror = function(e){
+          throw new Error(e.responseText);
+      }
+
+      await xhr.send(JSON.stringify({"login" : "userDTO.login", "password" : "userDTO.password"}));
+      console.log(JSON.stringify({"login" : "userDTO.login", "password" : "userDTO.password"}))
+      return buff;
+
     }
 
     async deleteUser(userDTO){

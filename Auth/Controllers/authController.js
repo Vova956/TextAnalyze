@@ -1,5 +1,5 @@
 const UserDTO = require('../DTO/userDTO')
-const userService = require('../Service/authService')
+const userService  = require("../Service/authService.js")
 
 class AuthController{
     async addUser(req,res,next){
