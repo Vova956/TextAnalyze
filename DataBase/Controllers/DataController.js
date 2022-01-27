@@ -1,5 +1,6 @@
 const dataService = require('../Service/dataBaseService')
-const TopicDTO = require('../DTO/TopicDTO')
+const TopicDTO = require('../DTO/TopicDTO');
+const Logger = require('../../Logger');
 
 class DataContorller{
 
@@ -43,7 +44,6 @@ class DataContorller{
             const {name, word} = req.body;
 
             const payload = new TopicDTO(name,word);
-            //console.log(word[0]);
 
             const result = await dataService.addTopic(payload);
 
@@ -55,6 +55,7 @@ class DataContorller{
         }
 
     }
+
     async addWord(req, res, next){
         try{
             const {name, word} = req.body;

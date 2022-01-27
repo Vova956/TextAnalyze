@@ -55,7 +55,7 @@ class DataService{
             throw new Error('There is no such topic');
         }
 
-        candidate.words.push(word);
+        console.log(candidate)
         return word;
     }
 

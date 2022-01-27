@@ -1,5 +1,5 @@
 const Router = require('express').Router;
-const controller = require("../Controller/dataController");
+const controller = require("../Controllers/dataController");
 
 const router = new Router();
 router.post('/addTopic',controller.addTopic);
