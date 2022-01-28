@@ -1,4 +1,4 @@
-const t = require('../Service/topicService')
+const topicService = require('../Service/topicService')
 const TopicDTO = require('../../DataBase/DTO/TopicDTO')
 
 class TopicController{
@@ -7,7 +7,7 @@ class TopicController{
         try {
             const {name} = req.body;
 
-            const result = await dataService.getTopic(name);
+            const result = await topicService.getTopic(name);
 
             return res.json({result});
 
@@ -18,7 +18,7 @@ class TopicController{
 
     async getTopics(req, res, next){
         try{
-            const result = await dataService.getTopics();
+            const result = await topicService.getTopics();
             return res.json({result})
 
         }catch(e){
@@ -32,7 +32,7 @@ class TopicController{
 
             const payload = new TopicDTO(name,word);
 
-            const result = await dataService.addTopic(payload);
+            const result = await topicService.addTopic(payload);
 
             return res.json({result});
 
@@ -46,7 +46,7 @@ class TopicController{
         try{
             const {name, word} = req.body;
         
-            const result = await dataService.addWord(name, word);
+            const result = await topicService.addWord(name, word);
 
             return res.json({result});
 
@@ -60,7 +60,7 @@ class TopicController{
         try{
             const {name} = req.body;
 
-            const result = await dataService.deleteTopic(name);
+            const result = await topicService.deleteTopic(name);
             
             return res.json({result})
 
@@ -72,7 +72,7 @@ class TopicController{
         try {
             const {name, word} = req.body;
 
-            const result = dataService.deleteWord(name, word);
+            const result = topicService.deleteWord(name, word);
 
             return res.json({result});
 
@@ -85,7 +85,7 @@ class TopicController{
         try {
             const {name, newName} = req.body;
             
-            const result = dataService.renameTopic(name, newName);
+            const result = topicService.renameTopic(name, newName);
 
             return res.json({result});
 
