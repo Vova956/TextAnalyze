@@ -6,11 +6,13 @@ const controller = require("../Controllers/topicController");
 
 // Router logic
 const router = new Router();
-router.post("/addUser", controller.addUser);
-router.post("/deleteUser", controller.deleteUser);
-router.get("/findUser", controller.findUser);
-router.post("/deleteAdmin", controller.deleteAdmin);
-router.post("/addAdmin", controller.addAdmin);
+router.post('/addTopic',controller.addTopic);
+router.post('/addWord',controller.addWord);
+router.delete('/deleteTopic', controller.deleteTopic);
+router.delete('/deleteWord', controller.deleteWord);
+router.post('/renameTopic', controller.renameTopic);
+router.get('/getTopics', controller.getTopics);
+router.get('/getTopic', controller.getTopic);
 
 // Export 'Auth Router' to project
 module.exports = router;

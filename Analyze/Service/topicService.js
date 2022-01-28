@@ -131,4 +131,4 @@ class TopicService{
     
 }
 
-module.exports = new AuthService();
+module.exports = new TopicService();

@@ -31,7 +31,6 @@ class DataContorller{
             const {name, word} = req.body;
 
             const payload = new TopicDTO(name,word);
-            //console.log(word[0]);
 
             const result = await dataService.addTopic(payload);
 
