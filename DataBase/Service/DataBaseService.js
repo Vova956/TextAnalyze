@@ -1,3 +1,4 @@
+const { Query } = require("mongoose");
 const TopicDTO = require("../DTO/TopicDTO");
 const topicModel = require('../Models/TopicModel');
 
@@ -18,20 +19,7 @@ class DataService{
         const candidate = await topicModel.find({});
         return candidate;
     }
-
-    async getTopicNames(){
-        const candidate = await topicModel.find({});
-        
-        var result = [];
-
-        for(let i = 0; candidate.length; i++){
-            result[i] = candidate[i].name;
-        }
-
-        return result;
-
-    }
-
+    
     async addTopic(topicDTO){
 
         const nameCandidate = await topicModel.findOne({name : topicDTO.name})
@@ -44,19 +32,21 @@ class DataService{
         
 
         return {
-            topic: {name: topicDTO.name, words: topicDTO.words}
+            topic: {name: topicDTO.name, words: topicDTO.word}
         }
     }
 
     async addWord(topicName, word){
-        var candidate = topicModel.findOne({name: topicName})
+        const candidate = topicModel.findOne({name: topicName});
 
         if(!candidate){
             throw new Error('There is no such topic');
         }
 
-        console.log(candidate)
-        return word;
+        let updatedModel = await topicModel.updateOne({name: topicName},{ $push: { words: word} });
+
+                   
+        return updatedModel;
     }
 
     async deleteTopic(topicName){
@@ -66,11 +56,12 @@ class DataService{
             throw new Error('There is no such topic');
         }
         
-        var res = new TopicDTO(deletionCandidate.name, deletionCandidate.words);
+        topicModel.deleteOne({ name: topicName }, function (err) {
+            if (err) 
+            throw new Error('There is no such word in this topic')
+        });
 
-        topicModel.deleteOne({name: topicName});
-
-        return res;
+        return deletionCandidate;
     }
 
     async deleteWord(topicName, word){
@@ -80,13 +71,13 @@ class DataService{
             throw new Error('There is no such topic');
         }
 
-        for(let i = 0; i < deletionCandidate.words.length; i++){
-            if(deletionCandidate.words[i] == word){
-                return deletionCandidate.words.pop(i);
+        let updatedModel = await topicModel.updateOne({name: topicName},{ $pull: { words: word} }, function(err){
+            if(err){
+                throw new Error('There is no such Word');
             }
-        }
+        });
 
-        throw new Error('There is no such word in this topic')
+        return updatedModel
     }
 
     async renameTopic(previousName, newName){
@@ -96,30 +87,10 @@ class DataService{
             throw new Error('There is no such topic');
         }
 
-        candidate.name = newName;
+        let updatedModel = await topicModel.updateOne({name: previousName},{ $set: { name: newName} });
 
-        return previousName;
-    }
-
-    async updateWord(topicName, previousWord, newWord){
-        var candidate = topicModel.findOne({name: topicName});
-
-        if(!candidate){
-            throw new Error('There is no such topic');
-        }
-
-        for(let i = 0; i < candidate.words.length; i++){
-            if(candidate.words[i] == previousWord){
-                candidate.words[i] = newWord;
-                return previousWord;
-            }
-        }
-
-        throw new Error('There is no such word in this topic')
-
-    }
-
-    
+        return updatedModel;
+    }  
 }
 
 module.exports = new DataService();

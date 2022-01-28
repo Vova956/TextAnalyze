@@ -1,6 +1,5 @@
 const dataService = require('../Service/dataBaseService')
-const TopicDTO = require('../DTO/TopicDTO');
-const Logger = require('../../Logger');
+const TopicDTO = require('../DTO/TopicDTO')
 
 class DataContorller{
 
@@ -28,22 +27,12 @@ class DataContorller{
         }
     }
 
-    async getTopicNames(req, res, next){
-        try {
-            const result = await dataService.getTopicNames();
-
-            return res.json({result})
-
-        } catch (e) {
-            return e;
-        }
-    }
-
     async addTopic(req,res,next){
         try{
             const {name, word} = req.body;
 
             const payload = new TopicDTO(name,word);
+            //console.log(word[0]);
 
             const result = await dataService.addTopic(payload);
 
@@ -55,7 +44,6 @@ class DataContorller{
         }
 
     }
-
     async addWord(req, res, next){
         try{
             const {name, word} = req.body;
@@ -103,19 +91,6 @@ class DataContorller{
 
             return res.json({result});
 
-        } catch (e) {
-            next(e);
-        }
-    }
-
-    async updateWord(req, res, next){
-        try {
-            const {name, word, newWord} = req.body;
-
-            const result = dataService.updateWord(name, word, newWord);
-
-            return res.json({result});
-        
         } catch (e) {
             next(e);
         }
