@@ -45,6 +45,16 @@ class AuthService{
         return user;
     }
 
+    async findAdmin(userDTO){
+        const user =  userModel.findOne({login : userDTO.login, password : userDTO.password,admin : true});
+
+        if(!user){
+            throw new Error('|DB ERORR| THERE IS NO SUCH USER');
+        }
+
+        return user;
+    }
+
     async addAdmin(userDTO){
         const loginCandidate = await userModel.findOne({login : userDTO.login})
 

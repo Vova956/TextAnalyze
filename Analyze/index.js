@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const Logger = require('../Logger');
 const analyzeRouter = require('./Routers/analyzeRouter');
+const topicRouter = require('./Routers/analyzeRouter');
 const errorMiddleware = require("./Middlewares/errorMiddleware");
 
 const PORT = process.env.ANALYZE_PORT;

@@ -66,7 +66,7 @@ class AuthService{
         var data = {"login": userDTO.login, "password": userDTO.password};
         var result = null; 
   
-        await sendHttpRequest("GET", "http://localhost:3000/auth/find", data).then(responseData =>{
+        await sendHttpRequest("GET", "http://localhost:3000/auth/findUser", data).then(responseData =>{
           result = {responseData};
         })
         .catch(error => {
