@@ -7,30 +7,49 @@ var XMLHttpRequest = require('xhr2');
 class AuthService{
     async addUser(userDTO){
       var buff;
-      /*const request = new Request('localhost:3000/auth/addUser', {
-      method: 'POST', 
-      body: JSON.stringify({login: userDTO.login, password : userDTO.password})});*/
 
       const xhr = new XMLHttpRequest();
       xhr.open('POST','http://localhost:3000/auth/addUser',true)
       xhr.responseType = 'json'
 
       xhr.onload = function(e){
-          buff = xhr.response;
+        buff = xhr.response;
       }
 
       xhr.onerror = function(e){
-          throw new Error(e.responseText);
+        throw new Error(e.responseText);
       }
 
-      await xhr.send(JSON.stringify({"login" : "userDTO.login", "password" : "userDTO.password"}));
-      console.log(JSON.stringify({"login" : "userDTO.login", "password" : "userDTO.password"}))
+      xhr.setRequestHeader('Content-Type','application/json')
+    
+      var data = {"login" : userDTO.login , "password" : userDTO.password} 
+      await xhr.send(JSON.stringify(data));
+      console.log(JSON.stringify(data))
       return buff;
 
     }
 
     async deleteUser(userDTO){
-   
+      var buff;
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST','http://localhost:3000/auth/addUser',true)
+      xhr.responseType = 'json'
+
+      xhr.onload = function(e){
+        buff = xhr.response;
+      }
+
+      xhr.onerror = function(e){
+        throw new Error(e.responseText);
+      }
+
+      xhr.setRequestHeader('Content-Type','application/json')
+    
+      var data = {"login" : userDTO.login , "password" : userDTO.password} 
+      await xhr.send(JSON.stringify(data));
+      console.log(JSON.stringify(data))
+      return buff;
     }
 
     async findUser(userDTO){
