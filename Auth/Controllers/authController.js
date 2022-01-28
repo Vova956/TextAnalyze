@@ -1,6 +1,6 @@
 // Get in-project files
 const UserDTO = require("../DTO/userDTO");
-const userService  = require("../Service/authService.js");
+const userService = require("../Service/authService");
 
 // Controller logic
 class AuthController{
@@ -8,16 +8,15 @@ class AuthController{
     async addUser(req, res, next){
         try{
             const {login, password} = req.body;
-            const payload = new UserDTO(login,password);
+            const payload = new UserDTO(login, password);
 
             const result = await userService.addUser(payload);
 
-            return res.json(result);
+            return res.json({result});
 
         }catch(error){
             next(error);
         }
-
     }
 
     // Delete User from DataBase
@@ -58,6 +57,7 @@ class AuthController{
             const payload = new UserDTO(login, password);
 
             const result = await userService.addAdmin(payload);
+
             return res.json({result});
 
         }catch(error){
@@ -72,6 +72,7 @@ class AuthController{
             const payload = new UserDTO(login,password);
 
             const result = await userService.deleteAdmin(payload);
+            
             return res.json({result});
 
         }catch(error){
