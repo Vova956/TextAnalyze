@@ -74,6 +74,20 @@ class AuthController{
         }
     }
 
+    async findAdmin(req,res,next){
+        try{
+            const {login, password} = req.body
+            const payload = new UserDTO(login,password)
+
+            const result = await userService.findAdmin(payload);
+            
+            return res.json({result});
+
+        }catch(e){
+            next(e)
+        }
+    }
+
 }
 
 module.exports = new AuthController();

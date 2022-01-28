@@ -26,14 +26,17 @@ module.exports = (err,req,res,next) => {
         var data = {"login": userDTO.login, "password": userDTO.password,"admin" : true};
         var result = null; 
   
-        await sendHttpRequest("GET", "http://localhost:3000/auth/find", data).then(responseData =>{
+        await sendHttpRequest("GET", "http://localhost:3000/auth/findAdmin", data).then(responseData =>{
           result = {responseData};
         })
         .catch(error => {
           Logger.error(error);
         })
+
+        if(!result){
+            throw new Error("|AUTH ERROR| Current user is not Admin");
+        }
         
-        req.user = userData
 
         next();
     }catch(e){
