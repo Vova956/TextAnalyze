@@ -1,79 +1,87 @@
-const UserDTO = require('../DTO/userDTO')
-const userService  = require("../Service/authService.js")
+// Get inside files
+const UserDTO = require('../DTO/userDTO');
+const userService  = require("../Service/authService.js");
+const Logger = require("../../Logger");
 
+// Controller
 class AuthController{
+    // Add User to DataBase
     async addUser(req,res,next){
         try{
-            const {login, password} = req.body
-            const payload = new UserDTO(login,password)
+            const {login, password} = req.body;
+            const payload = new UserDTO(login,password);
 
             const result = await userService.addUser(payload);
 
-            return res.json(result)
+            return res.json(result);
 
-        }catch(e){
-            next(e)
+        }catch(error){
+            next(error);
         }
 
     }
 
+    // Delete User from DataBase
     async deleteUser(req,res,next){
         try{
-            const {login, password} = req.body
-            const payload = new UserDTO(login,password)
+            const {login, password} = req.body;
+            const payload = new UserDTO(login,password);
 
             const result = await userService.deleteUser(payload);
             
-            return res.json({result})
+            return res.json({result});
 
-        }catch(e){
-            next(e)
+        }catch(error){
+            next(error);
         }
 
     }
 
+    // Find User in DataBase
     async findUser(req,res,next){
         try{
-            const {login, password} = req.body
-            const payload = new UserDTO(login,password)
+            const {login, password} = req.body;
+            const payload = new UserDTO(login,password);
 
             const result = await userService.findUser(payload);
             
             return res.json({result});
 
-        }catch(e){
-            next(e)
+        }catch(error){
+            next(error);
         }
     }
 
-    async deleteAdmin(req,res,next){
-        try{
-            const {login, password} = req.body
-            const payload = new UserDTO(login,password)
-
-            const result = await userService.deleteAdmin(payload);
-            
-            return res.json({result});
-
-        }catch(e){
-            next(e)
-        }
-    }
-
+    // Add Admin to DataBase
     async addAdmin(req,res,next){
         try{
-            const {login, password} = req.body
-            const payload = new UserDTO(login,password)
+            const {login, password} = req.body;
+            const payload = new UserDTO(login,password);
 
             const result = await userService.addAdmin(payload);
-            
+            Logger.info("Admin added: " + result);
             return res.json({result});
 
-        }catch(e){
-            next(e)
+        }catch(error){
+            next(error);
         }
     }
 
-}
+    // Delete Admin from DataBase
+    async deleteAdmin(req,res,next){
+        try{
+            const {login, password} = req.body;
+            const payload = new UserDTO(login,password);
 
+            const result = await userService.deleteAdmin(payload);
+            Logger.info("Admin deleted: " + result);
+            return res.json({result});
+
+        }catch(error){
+            next(error);
+        }
+    }
+}
+//123
+// Export 'Auth Controller' to project   
 module.exports = new AuthController();
