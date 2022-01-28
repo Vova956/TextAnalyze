@@ -40,9 +40,6 @@ class AnalyzeService{
 
         const topics = result.responseData.result;
 
-        console.log(topics)
-        //const topics = JSON.parse(result);
-
         const allWords = text.split(' ');   
         var allPoints = 0;
 
@@ -82,8 +79,6 @@ class AnalyzeService{
             bestTopics[i] = (arr[buffIndex][0]);
             arr[buffIndex][1] = -1;
         }
-
-        console.log(bestTopics);
 
         return bestTopics;
     }
