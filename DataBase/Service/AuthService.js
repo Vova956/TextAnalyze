@@ -7,7 +7,6 @@ class AuthService{
         const loginCandidate = await userModel.findOne({login : userDTO.login})
 
         if(loginCandidate){
-            //console.log(userDTO)
             throw new Error('|DB ERORR| USER WITH SUCH LOGIN EXISTS');
         }
 

@@ -7,7 +7,6 @@ router.post('/addWord',controller.addWord);
 router.delete('/deleteTopic', controller.deleteTopic);
 router.delete('/deleteWord', controller.deleteWord);
 router.post('/renameTopic', controller.renameTopic);
-router.post('/updateWord', controller.updateWord);
 router.get('/getTopics', controller.getTopics);
 router.get('/getTopic', controller.getTopic);
 

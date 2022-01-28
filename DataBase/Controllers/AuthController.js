@@ -4,7 +4,6 @@ const UserDTO = require('../DTO/userDTO')
 class AuthController{
     async addUser(req,res,next){
         try{
-            console.log(req.body)
             const {login, password} = req.body
             const payload = new UserDTO(login,password)
 
