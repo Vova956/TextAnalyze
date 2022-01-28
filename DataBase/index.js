@@ -10,7 +10,7 @@ const dataRouter = require('./Routers/dataRouter');
 const errorMiddleware = require("./Middlewares/errorMiddleware");
 
 const PORT = process.env.DB_PORT;
-const URL = process.env.DB_URL2;
+const URL = process.env.DB_URL;
 
 
 // Create app

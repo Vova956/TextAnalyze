@@ -13,7 +13,7 @@ const URL = process.env.DB_URL2;
 // Create app
 const app = express();
 app.use(express.json());
-app.use('/text',analyzeRouter);
+app.use('/analyze',analyzeRouter);
 app.use(errorMiddleware);
 
 // Start server

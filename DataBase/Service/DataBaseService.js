@@ -16,8 +16,8 @@ class DataService{
     }
  
     async getTopics(){
-        const candidate = await topicModel.find({});
-        return candidate;
+        const candidates = await topicModel.find({});
+        return candidates;
     }
     
     async addTopic(topicDTO){
@@ -32,7 +32,7 @@ class DataService{
         
 
         return {
-            topic: {name: topicDTO.name, words: topicDTO.word}
+            topic
         }
     }
 

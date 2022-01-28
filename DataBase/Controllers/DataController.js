@@ -19,7 +19,6 @@ class DataContorller{
     async getTopics(req, res, next){
         try{
             const result = await dataService.getTopics();
-
             return res.json({result})
 
         }catch(e){
