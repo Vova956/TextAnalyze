@@ -39,57 +39,71 @@ class TopicService{
         console.log(err);
       })
 
-      return result;
+      return result.responseData.result;
      
     }
 
-    async deleteUser(userDTO){
-        var data = {"login" : userDTO.login , "password" : userDTO.password}
-        var result = null; 
-  
-        await sendHttpRequest('POST','http://localhost:3000/auth/deleteUser',data).then(responseData =>{
-          result = {responseData};
-        })
-        .catch(err => {
-          console.log(err);
-        })
-  
-        return result;
-    }
-
-    async findUser(userDTO){
-        var data = {"login" : userDTO.login , "password" : userDTO.password}
-        var result = null; 
-  
-        await sendHttpRequest('GET','http://localhost:3000/auth/find',data).then(responseData =>{
-          result = {responseData};
-        })
-        .catch(err => {
-          console.log(err);
-        })
-  
-        return result;
-    }
-
-    async addAdmin(userDTO){
-        var data = {"login" : userDTO.login , "password" : userDTO.password}
-        var result = null; 
-  
-        await sendHttpRequest('POST','http://localhost:3000/auth/addAdmin',data).then(responseData =>{
-          result = {responseData};
-        })
-        .catch(err => {
-          console.log(err);
-        })
-  
-        return result;
-    }
-
-    async deleteAdmin(userDTO){
-      var data = {"login" : userDTO.login , "password" : userDTO.password}
+    async addWord(topicName, word){
+        var data = {"name" : topicName , "word" : word}
       var result = null; 
 
-      await sendHttpRequest('POST','http://localhost:3000/auth/deleteAdmin',data).then(responseData =>{
+      await sendHttpRequest('POST','http://localhost:3000/data/addWord',data).then(responseData =>{
+        result = {responseData};
+      })
+      .catch(err => {
+        console.log(err);
+      })
+
+      return result.responseData.result;
+    }
+
+    async deleteTopic(topicName){
+        var data = {"name" : topicName}
+        var result = null; 
+  
+        await sendHttpRequest('DELETE','http://localhost:3000/data/deleteTopic',data).then(responseData =>{
+          result = {responseData};
+        })
+        .catch(err => {
+          console.log(err);
+        })
+  
+        return result.responseData.result;
+    }
+
+    async deleteWord(topicName, word){
+        var data = {"name" : topicName , "word" : word}
+        var result = null; 
+  
+        await sendHttpRequest('DELETE','http://localhost:3000/data/deleteWord',data).then(responseData =>{
+          result = {responseData};
+        })
+        .catch(err => {
+          console.log(err);
+        })
+  
+        return result;
+    }
+
+    async getTopics(){
+        var data = {}
+        var result = null; 
+  
+        await sendHttpRequest('GET','http://localhost:3000/data/getTopics',data).then(responseData =>{
+          result = {responseData};
+        })
+        .catch(err => {
+          console.log(err);
+        })
+  
+        return result;
+    }
+
+    async getTopic(name){
+      var data = {"name" : name}
+      var result = null; 
+
+      await sendHttpRequest('GET','http://localhost:3000/data/getTopic',data).then(responseData =>{
         result = {responseData};
       })
       .catch(err => {
@@ -98,6 +112,22 @@ class TopicService{
 
       return result;
     }
+
+    async renameTopic(name, newName){
+        var data = {"name" : name, "newName" : name}
+        var result = null; 
+  
+        await sendHttpRequest('POST','http://localhost:3000/data/renameTopic',data).then(responseData =>{
+          result = {responseData};
+        })
+        .catch(err => {
+          console.log(err);
+        })
+  
+        return result;
+    }
+
+      
     
 }
 
