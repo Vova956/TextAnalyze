@@ -9,7 +9,7 @@ class AuthController{
 
             const result = await userService.addUser(payload);
 
-            return res.json({result})
+            return res.json(result)
 
         }catch(e){
             next(e)
