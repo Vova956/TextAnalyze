@@ -4,7 +4,7 @@
 // Error builder
 // <TYME> | <TYPE> | <PARAMS>
 
-// Error example
+// Logger example
 // 22-01-2022 23:48:30 | ERROR | Failed connection to DataBase
 
 class Logger{

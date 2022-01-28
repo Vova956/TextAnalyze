@@ -1,0 +1,8 @@
+Text Rubrification(Extendable Edition)
+
+Project made to analyze and get topic of any text!
+
+Main Programmers:
+Vova956(Vova Varga) - Auth, Analyze
+Dordeo(Michael Varga) - DataBase, Analyze
+Setredid(Bogdan Baranuk) - Logger, Testing, Beauty of the code

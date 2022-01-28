@@ -1,7 +1,10 @@
-module.exports = (err,req,res,next) => {
-   
-    console.log('Error')
-    console.log(err)
+// Get in-project files
+const Logger = require("../../Logger");
 
-    return res.status(500).json({message : "Error"})
+// Export 'Error Middleware' to project
+module.exports = (error, req, res, next) => {
+
+    Logger.error(error);
+
+    return res.status(500).json({message : "Error!"});
 }

@@ -1,11 +1,16 @@
-const Router = require('express').Router
-const controller = require("../Controllers/authController")
+// Get out-project files
+const Router = require("express").Router;
 
-const router = new Router()
-router.post('/addUser',controller.addUser)
-router.post('/deleteUser',controller.deleteUser)
-router.get('/findUser',controller.findUser)
-router.post('/deleteAdmin',controller.deleteAdmin)
-router.post('/addAdmin',controller.addAdmin)
+// Get in-project files
+const controller = require("../Controllers/authController");
 
-module.exports = router 
+// Router logic
+const router = new Router();
+router.post("/addUser", controller.addUser);
+router.post("/deleteUser", controller.deleteUser);
+router.get("/findUser", controller.findUser);
+router.post("/deleteAdmin", controller.deleteAdmin);
+router.post("/addAdmin", controller.addAdmin);
+
+// Export 'Auth Router' to project
+module.exports = router;

@@ -1,12 +1,11 @@
-// Get inside files
-const UserDTO = require('../DTO/userDTO');
+// Get in-project files
+const UserDTO = require("../DTO/userDTO");
 const userService  = require("../Service/authService.js");
-const Logger = require("../../Logger");
 
-// Controller
+// Controller logic
 class AuthController{
     // Add User to DataBase
-    async addUser(req,res,next){
+    async addUser(req, res, next){
         try{
             const {login, password} = req.body;
             const payload = new UserDTO(login,password);
@@ -22,7 +21,7 @@ class AuthController{
     }
 
     // Delete User from DataBase
-    async deleteUser(req,res,next){
+    async deleteUser(req, res, next){
         try{
             const {login, password} = req.body;
             const payload = new UserDTO(login,password);
@@ -38,7 +37,7 @@ class AuthController{
     }
 
     // Find User in DataBase
-    async findUser(req,res,next){
+    async findUser(req, res, next){
         try{
             const {login, password} = req.body;
             const payload = new UserDTO(login,password);
@@ -53,13 +52,12 @@ class AuthController{
     }
 
     // Add Admin to DataBase
-    async addAdmin(req,res,next){
+    async addAdmin(req, res, next){
         try{
             const {login, password} = req.body;
-            const payload = new UserDTO(login,password);
+            const payload = new UserDTO(login, password);
 
             const result = await userService.addAdmin(payload);
-            Logger.info("Admin added: " + result);
             return res.json({result});
 
         }catch(error){
@@ -68,13 +66,12 @@ class AuthController{
     }
 
     // Delete Admin from DataBase
-    async deleteAdmin(req,res,next){
+    async deleteAdmin(req, res, next){
         try{
             const {login, password} = req.body;
             const payload = new UserDTO(login,password);
 
             const result = await userService.deleteAdmin(payload);
-            Logger.info("Admin deleted: " + result);
             return res.json({result});
 
         }catch(error){
@@ -82,6 +79,6 @@ class AuthController{
         }
     }
 }
-//123
+
 // Export 'Auth Controller' to project   
 module.exports = new AuthController();
