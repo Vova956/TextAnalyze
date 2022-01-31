@@ -1,18 +1,20 @@
+// Get out-project files
 const UserDTO = require("../DTO/userDTO");
 const userModel = require("../Models/userModel");
 
-
+// Service logic
 class AuthService{
+    // Add user
     async addUser(userDTO){
         const loginCandidate = await userModel.findOne({login : userDTO.login})
 
         if(loginCandidate){
-            throw new Error('|DB ERORR| USER WITH SUCH LOGIN EXISTS');
+            throw new Error("User with such login does not exists!");
         }
 
-        const user = await userModel.create({login: userDTO.login,password: userDTO.password, admin : false});
+        const user = await userModel.create({login: userDTO.login, password: userDTO.password, admin : false});
 
-        return {
+        return{
             isAdded : true,
             user: {login: userDTO.login,password: userDTO.password,nickname: userDTO.nickname,admin : false}
         };
@@ -24,7 +26,7 @@ class AuthService{
         const candidate = await userModel.findOne({login : userDTO.login,password : userDTO.password,admin : false});
 
         if(!candidate){
-            throw new Error('|DB ERORR| THERE IS NO USER TO DELETE');
+            throw new Error("There is no user to delete!");
         }
         
         const user = await userModel.deleteOne({login : userDTO.login,password : userDTO.password});
@@ -39,7 +41,7 @@ class AuthService{
         const user =  userModel.findOne({login : userDTO.login, password : userDTO.password,admin : false});
 
         if(!user){
-            throw new Error('|DB ERORR| THERE IS NO SUCH USER');
+            throw new Error("There is no such user!");
         }
 
         return user;
@@ -49,7 +51,7 @@ class AuthService{
         const user =  userModel.findOne({login : userDTO.login, password : userDTO.password,admin : true});
 
         if(!user){
-            throw new Error('|DB ERORR| THERE IS NO SUCH USER');
+            throw new Error("|DB ERORR| THERE IS NO SUCH USER");
         }
 
         return user;
@@ -59,7 +61,7 @@ class AuthService{
         const loginCandidate = await userModel.findOne({login : userDTO.login})
 
         if(loginCandidate){
-            throw new Error('|DB ERORR| USER WITH SUCH LOGIN EXISTS');
+            throw new Error("|DB ERORR| USER WITH SUCH LOGIN EXISTS");
         }
 
         const user = await userModel.create({login: userDTO.login,password: userDTO.password, admin : true});
@@ -76,7 +78,7 @@ class AuthService{
         const user =  userModel.findOne({login : userDTO.login, password : userDTO.password,admin : true});
 
         if(!user){
-            throw new Error('|DB ERORR| THERE IS NO SUCH USER');
+            throw new Error("|DB ERORR| THERE IS NO SUCH USER");
         }
 
         return user;
