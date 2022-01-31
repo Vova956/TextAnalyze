@@ -79,24 +79,22 @@ class AuthController{
             next(error);
         }
     }
-<<<<<<< HEAD
 
+    // Find Admin in DataBase
     async findAdmin(req,res,next){
         try{
-            const {login, password} = req.body
-            const payload = new UserDTO(login,password)
+            const {login, password} = req.body;
+            const payload = new UserDTO(login,password);
 
             const result = await userService.findAdmin(payload);
             
             return res.json({result});
 
-        }catch(e){
-            next(e)
+        }catch(error){
+            next(errror);
         }
     }
 
-=======
->>>>>>> 191874a988662859d2937a3c5fe7df1ddae52bfe
 }
 
 // Export 'Auth Controller' to project 
