@@ -1,4 +1,7 @@
+// Get out-project files
 const { Query } = require("mongoose");
+
+// Get in-project files
 const TopicDTO = require("../DTO/TopicDTO");
 const topicModel = require('../Models/TopicModel');
 
